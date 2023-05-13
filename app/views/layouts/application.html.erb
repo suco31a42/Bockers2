@@ -1,16 +1,45 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bookers2</title>
+    <title>【test】Bookers2</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <a class="navbar-brand" href="/">
+            <span>Bookers</span>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                 aria-controls="navbarNavDropdown" aria-expanded="true" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <div class="navbar-nav ml-auto">
+              <a class="text-light nav-link" href="/"><svg class="fas fa-home"></svg> Home</a>
+              <% if user_signed_in? %>
+              <a class="text-light nav-link" href="/users"><svg class="fas fa-users"></svg> Users</a>
+              <a class="text-light nav-link" href="/books"><svg class="fas fa-book-open"></svg> Books</a>
+              <a class="text-light nav-link" rel="nofollow" data-method="delete" href="/users/sign_out"><svg class="fas fa-sign-out-alt"></svg> Log out</a>
+              <% else %>
+              <a class="text-light nav-link" href="/homes/about"><svg class="fas fa-link"></svg> About</a>
+              <a class="text-light nav-link" href="/users/sign_up"><svg class="fas fa-user-plus"></svg> Sign up</a>
+              <a class="text-light nav-link" href="/users/sign_in"><svg class="fas fa-sign-in-alt"></svg> Log in</a>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+
     <%= yield %>
   </body>
 </html>
