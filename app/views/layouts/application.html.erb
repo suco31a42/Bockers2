@@ -39,8 +39,8 @@
       </nav>
     </header>
     <main class="mb-auto">
-      <p id="notice"></p>
-      <%= yield %>
+    <%= flash[:notice] %>
+    <%= yield %>
     </main>
     <footer>
       <div class="container mt-5">
