@@ -38,8 +38,18 @@
         </div>
       </nav>
     </header>
-
-
-    <%= yield %>
+    <main class="mb-auto">
+      <p id="notice"></p>
+      <%= yield %>
+    </main>
+    <footer>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="mx-auto">
+            <p>CopyRight Infratop.inc</p>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
