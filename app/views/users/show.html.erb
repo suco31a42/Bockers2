@@ -1,7 +1,8 @@
-<div class="container px-5">
+<div class="container px-5 px-sm-0">
   <div class="row">
+    <%= render partial: "books/list", locals: { user: @user, book: @book } %>
     <div class="col-md-8 offset-md-1">
-      <%= render 'books/list' %>
+
     </div>
   </div>
 </div>

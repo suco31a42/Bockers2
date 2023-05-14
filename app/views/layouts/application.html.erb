@@ -23,12 +23,13 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <div class="navbar-nav ml-auto">
-              <a class="text-light nav-link" href="/"><svg class="fas fa-home"></svg> Home</a>
               <% if user_signed_in? %>
+              <a class="text-light nav-link" href="/users/<%= current_user.id %>"><svg class="fas fa-home"></svg> Home</a>
               <a class="text-light nav-link" href="/users"><svg class="fas fa-users"></svg> Users</a>
               <a class="text-light nav-link" href="/books"><svg class="fas fa-book-open"></svg> Books</a>
               <a class="text-light nav-link" rel="nofollow" data-method="delete" href="/users/sign_out"><svg class="fas fa-sign-out-alt"></svg> Log out</a>
               <% else %>
+              <a class="text-light nav-link" href="/"><svg class="fas fa-home"></svg> Home</a>
               <a class="text-light nav-link" href="/homes/about"><svg class="fas fa-link"></svg> About</a>
               <a class="text-light nav-link" href="/users/sign_up"><svg class="fas fa-user-plus"></svg> Sign up</a>
               <a class="text-light nav-link" href="/users/sign_in"><svg class="fas fa-sign-in-alt"></svg> Log in</a>
@@ -39,7 +40,7 @@
       </nav>
     </header>
     <main class="mb-auto">
-    <%= flash[:notice] %>
+      <p id="notice"><%= flash[:notice] %></p>
     <%= yield %>
     </main>
     <footer>
