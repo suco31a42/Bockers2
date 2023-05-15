@@ -1,2 +1,35 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <%= render partial: "list", locals: { user: @user, book: @book } %>
+    <div class="col-md-8 offset-md-1">
+      <h2>Book detail</h2>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th>
+              <%= link_to user_path(@bookid.user) do %>
+                <%= image_tag @bookid.user.get_profile_image(100,100) %>
+                <br>
+                <%= @bookid.user.name %>
+              <% end %>
+            </th>
+            <th>
+              <%= link_to @bookid.title, book_path(@bookid) %>
+            </th>
+            <th>
+              <%= @bookid.body %>
+            </th>
+            <% if @bookid.user == current_user %>
+            <th>
+              <%= link_to "Edit", edit_book_path(@bookid.id), class:"btn btn-sm btn-success" %>
+            </th>
+            <th>
+               <%= link_to "Destroy", book_path(@bookid.id), class:"btn btn-sm btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
+            </th>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
