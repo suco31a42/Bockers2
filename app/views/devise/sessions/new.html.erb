@@ -6,7 +6,7 @@
       <% if @user.errors.any? %>
         <ul class="alert alert-danger" role="alert">
           <h2 class="alert-heading">
-            <%= @user.errors.messages.count %>errors prohibited this user from being saved:
+            <%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:
           </h2>
           <hr>
           <% @user.errors.full_messages.each do |message| %>

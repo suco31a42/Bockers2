@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all.page(params[:page])
+    @users = User.all
     @user = current_user
     @book = Book.new
     @books = @user.books
