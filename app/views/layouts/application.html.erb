@@ -8,6 +8,9 @@
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
   </head>
 
   <body>
@@ -24,15 +27,15 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <div class="navbar-nav ml-auto">
               <% if user_signed_in? %>
-              <a class="text-light nav-link" href="/users/<%= current_user.id %>"><svg class="fas fa-home"></svg> Home</a>
-              <a class="text-light nav-link" href="/users"><svg class="fas fa-users"></svg> Users</a>
-              <a class="text-light nav-link" href="/books"><svg class="fas fa-book-open"></svg> Books</a>
-              <a class="text-light nav-link" rel="nofollow" data-method="delete" href="/users/sign_out"><svg class="fas fa-sign-out-alt"></svg> Log out</a>
+              <a class="text-light nav-link" href="/users/<%= current_user.id %>"><i class="fas fa-home"></i> Home</a>
+              <a class="text-light nav-link" href="/users"><i class="fas fa-users"></i> Users</a>
+              <a class="text-light nav-link" href="/books"><i class="fas fa-book-open"></i> Books</a>
+              <a class="text-light nav-link" rel="nofollow" data-method="delete" href="/users/sign_out"><i class="fas fa-sign-out-alt"></i> Log out</a>
               <% else %>
-              <a class="text-light nav-link" href="/"><svg class="fas fa-home"></svg> Home</a>
-              <a class="text-light nav-link" href="/home/about"><svg class="fas fa-link"></svg> About</a>
-              <a class="text-light nav-link" href="/users/sign_up"><svg class="fas fa-user-plus"></svg> Sign up</a>
-              <a class="text-light nav-link" href="/users/sign_in"><svg class="fas fa-sign-in-alt"></svg> Log in</a>
+              <a class="text-light nav-link" href="/"><i class="fas fa-home"></i> Home</a>
+              <a class="text-light nav-link" href="/home/about"><i class="fas fa-link"></i> About</a>
+              <a class="text-light nav-link" href="/users/sign_up"><i class="fas fa-user-plus"></i> Sign up</a>
+              <a class="text-light nav-link" href="/users/sign_in"><i class="fas fa-sign-in-alt"></i> Log in</a>
               <% end %>
             </div>
           </div>

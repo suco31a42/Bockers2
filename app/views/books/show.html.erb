@@ -10,14 +10,14 @@
               <%= link_to user_path(@bookid.user) do %>
                 <%= image_tag @bookid.user.get_profile_image(100,100) %>
                 <br>
-                <%= @bookid.user.name %>
+                <%= content_tag :div, @bookid.user.name ,class:"text-info"%>
               <% end %>
             </th>
             <th>
-              <%= link_to @bookid.title, book_path(@bookid) %>
+              <%= link_to @bookid.title, book_path(@bookid), class:"text-dark" %>
             </th>
             <th>
-              <%= @bookid.body %>
+              <%= content_tag :div, @bookid.body, class: "text-secondary" %>
             </th>
             <% if @bookid.user == current_user %>
             <th>

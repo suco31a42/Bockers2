@@ -21,10 +21,10 @@
             <% end %>
             </th>
             <th>
-            <%= link_to book.title, book_path(book) %>
+            <%= link_to book.title, book_path(book), class:"text-dark" %>
             </th>
             <th>
-            <%= book.body %>
+            <%= content_tag :div, book.body, class: "text-secondary" %>
             </th>
           </tr>
         <% end %>

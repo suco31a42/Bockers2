@@ -1,0 +1,14 @@
+
+.pagination>li>a {
+  border: none;
+  color: 	#444444;
+}
+
+.pagination>.active>a {
+  background: #D3D3D3;
+  border-radius: 20px;
+}
+
+.pagination>li>a:hover {
+  border-radius: 20px;
+}

@@ -18,15 +18,16 @@
             <%= image_tag user.get_profile_image(80,80) %>
             </th>
             <th>
-            <%= user.name %>
+            <%= content_tag :div, user.name, class: "text-secondary" %>
             </th>
             <th>
-            <%= link_to "Show", user_path(user.id)%>
+            <%= link_to "Show", user_path(user.id), class:"btn btn-sm btn-info"%>
             </th>
           </tr>
         <% end %>
         </tbody>
       </table>
+      <%= paginate @users, theme: 'twitter-bootstrap-4' %>
     </div>
   </div>
 </div>
