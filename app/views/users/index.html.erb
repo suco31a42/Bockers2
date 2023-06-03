@@ -1,5 +1,13 @@
 <div class="container px-5">
   <div class="row">
+    <%= render 'layouts/errors', obj: @book %>
+    <div class="col-md-3">
+      <h2>User info</h2>
+      <%= render 'users/info', current_user %>
+      <h2 class="mt-3">New Book</h2>
+      <%= render 'books/form', book: @book %>
+    </div>
+    
     <%= render partial: "books/list", locals: { user: @user, book: @book } %>
     <div class="col-md-8 offset-md-1">
       <h2>Users</h2>
