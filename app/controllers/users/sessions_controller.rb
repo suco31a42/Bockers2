@@ -4,6 +4,6 @@ class Users::SessionsController < Devise::SessionsController
     sign_in user
     redirect_to user_path(user), notice: 'gurstuserでログインしました'
   end
-  
-  
+
+
 end
