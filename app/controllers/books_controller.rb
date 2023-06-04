@@ -12,26 +12,23 @@ class BooksController < ApplicationController
       flash[:notice] = "You have created book successfully."
       redirect_to book_path(@book.id)
     else
-      @books = Book.includes(:favorited_users).
-        sort_by {|x|
-          x.favorited_users.includes(:favorites).where(created_at: from...to).size
-        }.reverse
+      @books = Book.sorted_by_favorites_and_without_favorites_created_this_week
+                .or(Book.sorted_by_favorites)
+                .page(params[:page])
       render 'index'
     end
   end
 
   def index
     @book  = Book.new
-    to = Time.current.at_end_of_day
-    from = (to - 6.day).at_beginning_of_day
-    @books = Book.left_outer_joins(:favorited_users)
-                .group('books.id')
-                .order('COUNT(favorites.id) DESC')
-                .select('books.*, COUNT(favorites.id) as favorites_count')
-                .where('favorites.created_at >= ?', from)
-                .where('favorites.created_at <= ?', to )
-                .or(Book.left_outer_joins(:favorited_users)
-                        .where(favorites: {id: nil}))
+    @books = Book.sorted_by_favorites_and_without_favorites_created_this_week
+                .or(Book.sorted_by_favorites)
+                .page(params[:page])
+    @today_book =  @books.created_today
+    @yesterday_book = @books.created_yesterday
+    @this_week_book = @books.created_this_week
+    @last_week_book = @books.created_last_week
+
   end
 
   def show
