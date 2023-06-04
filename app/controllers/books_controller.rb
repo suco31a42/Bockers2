@@ -12,22 +12,20 @@ class BooksController < ApplicationController
       flash[:notice] = "You have created book successfully."
       redirect_to book_path(@book.id)
     else
-      @books = Book.sorted_by_favorites_and_without_favorites_created_this_week
-                .or(Book.sorted_by_favorites)
-                .page(params[:page])
+
       render 'index'
     end
   end
 
   def index
     @book  = Book.new
+
     @books = Book.sorted_by_favorites_and_without_favorites_created_this_week
                 .or(Book.sorted_by_favorites)
-                .page(params[:page])
-    @today_book =  @books.created_today
-    @yesterday_book = @books.created_yesterday
-    @this_week_book = @books.created_this_week
-    @last_week_book = @books.created_last_week
+    @today_book =  Book.created_today
+    @yesterday_book = Book.created_yesterday
+    @this_week_book = Book.created_this_week
+    @last_week_book = Book.created_last_week
 
   end
 
