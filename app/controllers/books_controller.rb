@@ -12,7 +12,14 @@ class BooksController < ApplicationController
       flash[:notice] = "You have created book successfully."
       redirect_to book_path(@book.id)
     else
-
+      from = 1.week.ago.beginning_of_day
+      to = Time.current.end_of_day
+      @books = Book.left_outer_joins(:favorites)
+                 .where(favorites: { created_at: from..to })
+                 .order(favorites_count: :desc)
+                 .includes(:user)
+                 .or(Book.left_outer_joins(:favorites)
+                         .where(favorites: { id: nil }))
       render 'index'
     end
   end
@@ -22,16 +29,15 @@ class BooksController < ApplicationController
     from = 1.week.ago.beginning_of_day
     to = Time.current.end_of_day
     @books = Book.left_outer_joins(:favorites)
-             .where(favorites: { created_at: from..to })
-             .order(favorites_count: :desc)
-             .includes(:user)
-             .or(Book.left_outer_joins(:favorites)
-                     .where(favorites: { id: nil }))
+                  .where(favorites: { created_at: from..to })
+                  .order(favorites_count: :desc)
+                  .includes(:user)
+                  .or(Book.left_outer_joins(:favorites)
+                          .where(favorites: { id: nil }))
     @today_book =  Book.created_today
     @yesterday_book = Book.created_yesterday
     @this_week_book = Book.created_this_week
     @last_week_book = Book.created_last_week
-
   end
 
   def show
