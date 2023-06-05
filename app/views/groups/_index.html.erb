@@ -9,17 +9,17 @@
     </tr>
   </thead>
   <tbody>
-    <% group_lists.each do |list| %>
+    <% group.each do |group| %>
       <tr>
-        <td><%= link_to(list) do %>
-          <%= image_tag list.get_group_image(60,60) %>
-          <% end %>
-        </td>
-        <th><%= link_to list.name,list %></th>
-        <td><%= list.introduction %></td>
-        <% if list.user_ids.include?(current_user.id) %>
-          <td><%= link_to "Edit", edit_list_path(list.id), class:"btn btn-sm btn-success" %></td>
-          <td><%= link_to "Destroy", list_path(list.id), class:"btn btn-sm btn-danger", method: :destroy %></td>
+        <td><%= image_tag group.get_group_image(60,60) %></td>
+        <th><%= link_to group.name,group_path(group) %></th>
+        <td><%= group.introduction %></td>
+        <% if group.owner_id == current_user.id %>
+          <td><%= link_to "Edit", edit_group_path(group), class:"btn btn-sm btn-success" %></td>
+          <td><%= link_to "Destroy", group_path(group), method: :delete, class:"btn btn-sm btn-danger","data-confirm" => "本当に削除しますか？" %></td>
+        <% else %>
+          <td></td>
+          <td></td>
         <% end %>
       </tr>
     <% end %>

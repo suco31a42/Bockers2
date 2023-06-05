@@ -9,7 +9,8 @@
     </div>
     <div class="col-md-8 offset-md-1">
       <h2>Groups</h2>
-      <%= render 'index', group_lists: @group_lists %>
+      <div><%=link_to "グループを作成する",new_group_path %> | <%=link_to "グループ一覧",groups_path %></div>
+      <%= render 'index', group: @group %>
     </div>
   </div>
 </div>

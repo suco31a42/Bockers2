@@ -1,28 +1,31 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:edit, :update]
+  before_action :authenticate_user!
+  before_action :ensure_correct_user, only: [:edit, :update]
 
   def new
     @group = Group.new
-    @group.users << current_user
+    # @group.users << current_user
   end
 
   def create
     @group = Group.new(group_params)
+    @group.owner_id = current_user.id
     if @group.save
-      redirect_to groups_url, notice: "グループを作成しました"
+      redirect_to groups_path, notice: "グループを作成しました"
     else
-      render :new
+      render 'new'
     end
   end
 
   def index
     @book = Book.new
-    @group_lists = Group.all
-    @group_joining = GroupUser.where(user_id: current_user.id)
-    @group_lists_none = "グループに参加していません"
+    @group = Group.all
+    # @group_joining = GroupUser.where(user_id: current_user.id)
+    # @group_lists_none = "グループに参加していません"
   end
 
   def show
+    @book = Book.new
     @group = Group.find(params[:id])
   end
 
@@ -33,26 +36,30 @@ class GroupsController < ApplicationController
   def update
     @group = Group.find(params[:id])
     if @group.update(group_params)
-      redirect_to groups_path, notice: "グループを更新しました"
+      redirect_to group_path(@group.id), notice: "グループを更新しました"
     else
       render :edit
     end
   end
 
   def destroy
-    delete_group = Group.find(params[:id])
-    if delete_group.destroy
-      redirect_to groups_path, notice: "グループを削除しました"
-    end
+    @group = Group.find(params[:id])
+    @group.destroy
+    redirect_to groups_path, notice: "グループを削除しました"
   end
 
   private
-    def set_group
-      @group = Group.find(params[:id])
-    end
 
-    def group_params
-      params.require(:group).permit(:name, user_ids: [])
+  def group_params
+    params.require(:group).permit(:name, :group_image, :introduction, user_ids: [])
+  end
+
+  def ensure_correct_user
+    @group = Group.find(params[:id])
+    unless @group.owner_id == current_user.id
+      redirect_to groups_path
     end
+  end
+
 
 end
