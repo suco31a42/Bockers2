@@ -8,6 +8,8 @@
       <%= render 'books/form', book: @book %>
     </div>
     <div class="col-md-8 offset-md-1">
+      <%= link_to "グループを作成する", new_group_path %>｜
+      <%= link_to "グループ一覧", groups_path %>
       <h2>Users</h2>
       <table class="table table-hover table-inverse">
         <thead>

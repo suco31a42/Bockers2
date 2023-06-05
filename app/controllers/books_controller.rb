@@ -20,6 +20,10 @@ class BooksController < ApplicationController
                  .includes(:user)
                  .or(Book.left_outer_joins(:favorites)
                          .where(favorites: { id: nil }))
+      @today_book =  Book.created_today
+      @yesterday_book = Book.created_yesterday
+      @this_week_book = Book.created_this_week
+      @last_week_book = Book.created_last_week
       render 'index'
     end
   end
