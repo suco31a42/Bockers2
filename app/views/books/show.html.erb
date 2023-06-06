@@ -25,6 +25,9 @@
             <th>
               <%= content_tag :div, @bookid.body, class: "text-secondary" %>
             </th>
+            <th>
+              <%= render 'star', book: @bookid %>
+            </th>
             <% if @bookid.user == current_user %>
             <th>
               <%= link_to "Edit", edit_book_path(@bookid.id), class:"btn btn-sm btn-success" %>
