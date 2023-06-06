@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+<script src="https://kit.fontawesome.com/5cd4f9ddd3.js" crossorigin="anonymous"></script>
 
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application' %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    
   </head>
 
   <body>
@@ -31,7 +32,7 @@
               <a class="text-light nav-link" rel="nofollow" data-method="delete" href="/users/sign_out"><svg class="fas fa-sign-out-alt"></svg> Log out</a>
               <% else %>
               <a class="text-light nav-link" href="/"><svg class="fas fa-home"></svg> Home</a>
-              <a class="text-light nav-link" href="/home/about"><svg class="fas fa-link"></svg> About</a>
+              <a class="text-light nav-link" href="/home/about"><i class="fa-solid fa-house"></i>About</a>
               <a class="text-light nav-link" href="/users/sign_up"><svg class="fas fa-user-plus"></svg> Sign up</a>
               <a class="text-light nav-link" href="/users/sign_in"><svg class="fas fa-sign-in-alt"></svg> Log in</a>
               <% end %>
