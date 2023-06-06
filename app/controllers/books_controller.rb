@@ -76,6 +76,7 @@ class BooksController < ApplicationController
     params.require(:book).permit(:title, :body, :score)
   end
 
+
   def is_matching_login_user
     @book = Book.find(params[:id])
     unless @book.user_id == current_user.id
