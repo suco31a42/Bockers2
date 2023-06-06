@@ -26,7 +26,7 @@
               <%= content_tag :div, @bookid.body, class: "text-secondary" %>
             </th>
             <th>
-              <%= render 'star', book: @bookid %>
+              <%= render 'books/star', book: @bookid %>
             </th>
             <% if @bookid.user == current_user %>
             <th>

@@ -6,7 +6,7 @@
 import 'bootstrap/dist/js/bootstrap';
 
 import Rails from "@rails/ujs"
-// import Turbolinks from "turbolinks"
+import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
@@ -23,6 +23,6 @@ window.raty = function(elem,opt) {
   return raty;
 }
 Rails.start()
-// Turbolinks.start()
+Turbolinks.start()
 ActiveStorage.start()
 window.$ = window.jQuery = require('jquery');
