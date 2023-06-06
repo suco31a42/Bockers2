@@ -7,6 +7,17 @@
     <%= f.label :body, "Opinion" %>
     <%= f.text_area :body, class:'form-control book_body'%>
   </div>
+  <div class="form-group" id="post_raty">
+    <%= f.label :evaluation, "星評価" %>
+    <%= f.hidden_field :evaluation, id: :review_raty  
+    <script>
+      let elem = document.getElementById('#post_raty');
+      let opt = {
+        
+      };
+      rety(elem,opt)
+    </script>
+  </div>
   <div class="form-group">
     <%= f.submit "Create Book", class:'btn btn-success' %>
   </div>
