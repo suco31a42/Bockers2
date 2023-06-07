@@ -11,7 +11,7 @@
   <tbody>
     <% group.each do |group| %>
       <tr>
-        <td><%= image_tag group.get_group_image(60,60) %></td>
+        <td><%= image_tag group.get_group_image, size: '50x50' %></td>
         <th><%= link_to group.name,group_path(group) %></th>
         <td><%= group.introduction %></td>
         <% if group.owner_id == current_user.id %>

@@ -1,0 +1,24 @@
+<table class="table table-hover table-inverse">
+  <thead>
+    <tr>
+      <th>image</th>
+      <th>name</th>
+      <th></th>
+      <th>follower</th>
+      <th>followed</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% users.each do |user| %>
+    <tr>
+      <td><%= image_tag user.get_profile_image, size: '50x50' %></td>
+      <td><%= user.name %></td>
+      <td><%= link_to "Show", user_path(user.id)%></td>
+      <td><%= user.follower.count %></td>
+      <td><%= user.followed.count %></td>
+      <td><%= render 'relationships/btn', user: user %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

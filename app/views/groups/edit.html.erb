@@ -5,15 +5,15 @@
       <h1>Create Group</h1>
       <%= form_with model: @group do |f| %>
         <div class="form-group">
-          <%= f.label :name, "グループ名" %>
+          <%= f.label :グループ名 %>
           <%= f.text_field :name, class:'form-control' %>
         </div>
         <div class="form-group">
-          <%= f.label :introduction, "紹介文" %>
+          <%= f.label :紹介文 %>
           <%= f.text_area :introduction, class:'form-control'%>
         </div>
         <div class="form-group">
-          <%= f.label :group_image, "グループ画像" %>
+          <%= f.label :グループ画像 %>
           <br>
           <%= f.file_field :group_image, accept: "image/*", class: "form-control-file"  %>
         </div>

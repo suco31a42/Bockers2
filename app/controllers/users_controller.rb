@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :is_matching_login_user, only: [:edit, :update]
   before_action :ensure_guest_user, only: [:edit]
-  
+
   def new
     @user = User.new
   end
@@ -17,7 +17,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @book = Book.new
     @books = @user.books
-
+    @following_users = @user.following_user
+    @follower_users = @user.follower_user
   end
 
   def edit
@@ -32,6 +33,16 @@ class UsersController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def follows
+    @user = User.find(params[:id])
+    @users = @user.following_user
+  end
+
+  def followers
+    @user = User.find(params[:id])
+    @users = @user.follower_user
   end
 
 

@@ -1,5 +1,4 @@
-
-<%= image_tag user.get_profile_image(100,100) %>
+<%= image_tag user.get_profile_image, size: '100x100' %>
 <table class="table">
   <tbody>
     <tr>
@@ -8,14 +7,35 @@
     </tr>
     <tr>
       <th>introduction</th>
-      <th><%= user.introduction %></th>
+      <td><%= user.introduction %></td>
+    </tr>
+    <tr>
+      <th>Follows</th>
+      <td>
+        <%= link_to follows_user_path(user) do %>
+          <h6><%= user.follower.count %></h6>
+        <% end %>
+      </td>
+      </tr>
+      <tr>
+        <th>Followers</th>
+        <td>
+          <%= link_to followers_user_path(user) do %>
+            <h6><%= user.followed.count %></h6>
+          <% end %>
+      </td>
     </tr>
   </tbody>
 </table>
-<% if user.name != "guestuser" %>
-  <div class="row">
-    <%= link_to edit_user_path(user) ,class: "btn btn-outline-secondary btn-block" do %>
-      <i class="fas fa-user-cog"></i>
+
+<div>
+  <% if user.name != "guestuser" %>
+    <% if current_user != user %>
+      <td><%= render 'relationships/btn', user: user %></td>
+    <% else %>
+      <%= link_to edit_user_path(user) ,class: "btn btn-outline-secondary btn-block" do %>
+        <i class="fas fa-user-cog"></i>
+      <% end %>
     <% end %>
-  </div>
-<% end %>
+  <% end %>
+</div>

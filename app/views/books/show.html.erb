@@ -14,7 +14,7 @@
           <tr>
             <th>
               <%= link_to user_path(@bookid.user) do %>
-                <%= image_tag @bookid.user.get_profile_image(100,100) %>
+                <%= image_tag @bookid.user.get_profile_image, size: '50x50' %>
                 <br>
                 <%= content_tag :div, @bookid.user.name ,class:"text-info"%>
               <% end %>

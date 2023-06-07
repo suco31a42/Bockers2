@@ -10,30 +10,7 @@
     <div class="col-md-8 offset-md-1">
       <h2>Users</h2>
       <div><%=link_to "グループを作成する",new_group_path %> | <%=link_to "グループ一覧",groups_path %></div>
-      <table class="table table-hover table-inverse">
-        <thead>
-          <tr>
-            <th>image</th>
-            <th>name</th>
-            <th colspan="3"></th>
-          </tr>
-        </thead>
-        <tbody>
-        <% @users.each do |user| %>
-          <tr>
-            <th>
-            <%= image_tag user.get_profile_image(80,80) %>
-            </th>
-            <th>
-            <%= content_tag :div, user.name, class: "text-secondary" %>
-            </th>
-            <th>
-            <%= link_to "Show", user_path(user.id), class:"btn btn-sm btn-info"%>
-            </th>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
+      <%= render 'index', users: @users %>
     </div>
   </div>
 </div>
