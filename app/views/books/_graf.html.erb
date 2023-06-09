@@ -1,0 +1,71 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>６日前</th>
+      <th>５日前</th>
+      <th>４日前</th>
+      <th>３日前</th>
+      <th>２日前</th>
+      <th>１日前</th>
+      <th>今日</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= books.created_6day.count %></td>
+      <td><%= books.created_5day.count %></td>
+      <td><%= books.created_4day.count %></td>
+      <td><%= books.created_3day.count %></td>
+      <td><%= books.created_2day.count %></td>
+      <td><%= books.created_yesterday.count %></td>
+      <td><%= books.created_today.count %></td>
+    </tr>
+  </tbody>
+</table>
+
+<canvas id="myChart"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    document.addEventListener('turbolinks:load', function() {
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['6日前', '5日前', '4日前', '3日前', '2日前', '1日前', '今日'],
+          datasets: [{
+              label: '投稿した本の数',
+              data: [
+                <%= books.created_6day.count %>,
+                <%= books.created_5day.count %>,
+                <%= books.created_4day.count %>,
+                <%= books.created_3day.count %>,
+                <%= books.created_2day.count %>,
+                <%= books.created_yesterday.count %>,
+                <%= books.created_today.count %>
+              ],
+              borderColor: "rgba(0,0,255,1)",
+              backgroundColor: "rgba(0,0,0,0)",
+              tension: 0.4
+            }],
+        },
+        options: {
+          plugins: {
+              title: {
+                display: true,
+                text: '７日感の投稿数の比較'
+              }
+            },
+            responsive: true,
+            scales: {
+              y:{
+                suggestedMin: 0,
+                suggestedMax: 10
+              },
+              x:{
+                stacked: true
+              },
+            },
+          }
+        });
+      });
+  </script>
