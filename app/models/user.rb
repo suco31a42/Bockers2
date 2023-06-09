@@ -16,6 +16,10 @@ class User < ApplicationRecord
   has_many :following_user, through: :follower, source: :followed
   # :命名, :中間テーブルを通す, :followedモデルのフォローする側の情報を習得
   has_many :follower_user, through: :followed, source: :follower
+  
+  has_many :user_rooms, dependent: :destroy
+  has_many :chats, dependent: :destroy
+  has_many :rooms, through: :user_rooms, dependent: :destroy
 
   validates :name, uniqueness: true, presence: true, length: { minimum: 2, maximum: 20 }
   validates :introduction, length: { maximum: 50 }

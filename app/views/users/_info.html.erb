@@ -32,6 +32,9 @@
   <% if user.name != "guestuser" %>
     <% if current_user != user %>
       <td><%= render 'relationships/btn', user: user %></td>
+      <% if current_user != user && current_user.following?(user) && user.following?(current_user) %>
+        <%= link_to 'chatを始める', chat_path(user.id), class: "ml-3" %>
+      <% end %>
     <% else %>
       <%= link_to edit_user_path(user) ,class: "btn btn-outline-secondary btn-block" do %>
         <i class="fas fa-user-cog"></i>
