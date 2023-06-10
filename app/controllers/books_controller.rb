@@ -13,14 +13,6 @@ class BooksController < ApplicationController
       flash[:notice] = "You have created book successfully."
       redirect_to book_path(@book.id)
     else
-      from = 1.week.ago.beginning_of_day
-      to = Time.current.end_of_day
-      @books = Book.left_outer_joins(:favorites)
-                 .where(favorites: { created_at: from..to })
-                 .order(favorites_count: :desc)
-                 .includes(:user)
-                 .or(Book.left_outer_joins(:favorites)
-                         .where(favorites: { id: nil }))
       @today_book =  Book.created_today
       @yesterday_book = Book.created_yesterday
       @this_week_book = Book.created_this_week
@@ -35,7 +27,7 @@ class BooksController < ApplicationController
     @yesterday_book = Book.created_yesterday
     @this_week_book = Book.created_this_week
     @last_week_book = Book.created_last_week
-    
+
     if params[:latest]
       @books = Book.latest
     elsif params[:old]
@@ -52,12 +44,18 @@ class BooksController < ApplicationController
                     .or(Book.left_outer_joins(:favorites)
                             .where(favorites: { id: nil }))
     end
+    unless ReadCount.where(created_at: Time.zone.now.all_day).find_by(user_id: current_user.id, book_id: @book.id)
+      current_user.read_counts.create(book_id: @book.id)
+    end
   end
 
   def show
     @bookid = Book.find(params[:id])
     @book = Book.new
     @user = @bookid.user
+    unless ReadCount.where(created_at: Time.zone.now.all_day).find_by(user_id: current_user.id, book_id: @bookid.id)
+      current_user.read_counts.create(book_id: @bookid.id)
+    end
   end
 
   def edit

@@ -24,6 +24,7 @@
             <th><%= render 'books/star', book: @bookid %></th>
           </tr>
           <tr>
+            <th>PV:<%= @bookid.read_counts.count %></th>
             <th>
               <div class="text-danger d-flex align-items-center">
                 <i class="fas fa-heart", aria-hidden="true"></i>
