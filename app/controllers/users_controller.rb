@@ -2,8 +2,16 @@ class UsersController < ApplicationController
   before_action :is_matching_login_user, only: [:edit, :update]
   before_action :ensure_guest_user, only: [:edit]
 
-  def new
-    @user = User.new
+  def search
+    @user = User.find(params[:user_id])
+    @books = @user.books
+    @book = Book.new
+    if params[:created_at] == ""
+      @search_book = "日付を選択してください"
+    else
+      create_at = params[:created_at]
+      @search_book = @books.where('DATE(created_at) = ?', create_at.to_date).count
+    end
   end
 
   def index
