@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user!
   before_action :is_matching_login_user, only: [:edit, :update, :destroy]
 
   def new
@@ -30,18 +31,27 @@ class BooksController < ApplicationController
 
   def index
     @book  = Book.new
-    from = 1.week.ago.beginning_of_day
-    to = Time.current.end_of_day
-    @books = Book.left_outer_joins(:favorites)
-                  .where(favorites: { created_at: from..to })
-                  .order(favorites_count: :desc)
-                  .includes(:user)
-                  .or(Book.left_outer_joins(:favorites)
-                          .where(favorites: { id: nil }))
     @today_book =  Book.created_today
     @yesterday_book = Book.created_yesterday
     @this_week_book = Book.created_this_week
     @last_week_book = Book.created_last_week
+    
+    if params[:latest]
+      @books = Book.latest
+    elsif params[:old]
+      @books = Book.old
+    elsif params[:star_count]
+      @books = Book.star_count
+    else
+      from = 1.week.ago.beginning_of_day
+      to = Time.current.end_of_day
+      @books = Book.left_outer_joins(:favorites)
+                    .where(favorites: { created_at: from..to })
+                    .order(favorites_count: :desc)
+                    .includes(:user)
+                    .or(Book.left_outer_joins(:favorites)
+                            .where(favorites: { id: nil }))
+    end
   end
 
   def show

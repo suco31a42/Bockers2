@@ -21,6 +21,7 @@
           <%= render 'favorites/favorite_btn', book: book %>
         </td>
         <td><%= render 'books/star', book: book %></td>
+        <td><%= l book.created_at %></td>
       </tr>
     <% end %>
   </tbody>

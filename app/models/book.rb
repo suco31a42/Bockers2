@@ -20,4 +20,8 @@ class Book < ApplicationRecord
   scope :created_5day, -> { where(created_at: 5.day.ago.all_day) }
   scope :created_6day, -> { where(created_at: 6.day.ago.all_day) }
   
+  scope :latest, -> { order(created_at: :desc) }
+  scope :old, -> { order(created_at: :asc) }
+  scope :star_count, -> { order(star: :desc) }
+  
 end

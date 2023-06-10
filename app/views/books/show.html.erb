@@ -16,25 +16,24 @@
               <%= link_to user_path(@bookid.user) do %>
                 <%= image_tag @bookid.user.get_profile_image, size: '50x50' %>
                 <br>
-                <%= content_tag :div, @bookid.user.name ,class:"text-info"%>
+                <%= @bookid.user.name%>
               <% end %>
             </th>
+            <th><%= link_to @bookid.title, book_path(@bookid)%></th>
+            <th><%= @bookid.body %></th>
+            <th><%= render 'books/star', book: @bookid %></th>
+          </tr>
+          <tr>
             <th>
-              <%= link_to @bookid.title, book_path(@bookid), class:"text-dark" %>
+              <div class="text-danger d-flex align-items-center">
+                <i class="fas fa-heart", aria-hidden="true"></i>
+                <span class="count"><%= @bookid.favorites.count %></span>
+              </div>
             </th>
-            <th>
-              <%= content_tag :div, @bookid.body, class: "text-secondary" %>
-            </th>
-            <th>
-              <%= render 'books/star', book: @bookid %>
-            </th>
+            <th><%= l @bookid.created_at, format: :time %></th>
             <% if @bookid.user == current_user %>
-            <th>
-              <%= link_to "Edit", edit_book_path(@bookid.id), class:"btn btn-sm btn-success" %>
-            </th>
-            <th>
-               <%= link_to "Destroy", book_path(@bookid.id), class:"btn btn-sm btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
-            </th>
+            <th><%= link_to "Edit", edit_book_path(@bookid.id), class:"btn btn-sm btn-success" %></th>
+            <th><%= link_to "Destroy", book_path(@bookid.id), class:"btn btn-sm btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %></th>
             <% end %>
           </tr>
         </tbody>
