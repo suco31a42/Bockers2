@@ -1,4 +1,5 @@
 <% if group.owner_id == current_user.id %>
+  <%= link_to 'Notice an Event',group_new_mail_path(group), class: "btn btn-sm btn-info" %>
   <%= link_to "Edit", edit_group_path(group.id), class:"btn btn-sm btn-success" %>
   <%= link_to "Destroy", group_path(group.id), class:"btn btn-sm btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
 <% elsif group.includesUser?(current_user) %>
