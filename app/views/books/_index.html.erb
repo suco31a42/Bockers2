@@ -21,6 +21,11 @@
         <td id="favorite-btn-<%= book.id %>"  class="table-sm">
           <%= render 'favorites/favorite_btn', book: book %>
         </td>
+        <th>
+          <% if book.category.present? %>
+            <%= link_to book.category, tagsearches_search_path(content: book.category) %>
+          <% end %>
+        </th>
         <td><%= render 'books/star', book: book %></td>
         <td>PV:<%= book.read_counts.count %></td>
         <td><%= l book.created_at %></td>

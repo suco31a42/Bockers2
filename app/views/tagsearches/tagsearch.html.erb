@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2><%= @model %>s search for "<%= @word %>"</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Title</th>
+            <th>Opinion</th>
+            <th>Tag</th>
+          </tr>
+        </thead>
+        <% @books.each do |book| %>
+        <tbody>
+          <tr>
+            <td><%= image_tag book.user.get_profile_image, sice: '50x50' %></td>
+            <td><%= link_to book.title ,book %></td>
+            <td><%= book.body %></td>
+            <th><%= book.category %></th>
+            <td>PV:<%= book.read_counts.count %></td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

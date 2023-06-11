@@ -1,14 +1,18 @@
 <%= form_with model: book, local: true, html: {class:"form-horizontal"} do |f| %>
   <div class="form-group">
-    <%= f.label :title %>
+    <%= f.label :Title %>
     <%= f.text_field :title, class:'form-control book_title' %>
   </div>
   <div class="form-group">
-    <%= f.label :body, "Opinion" %>
+    <%= f.label :Opinion %>
     <%= f.text_area :body, class:'form-control book_body'%>
   </div>
+  <div class="form-group">
+    <%= f.label :Category %>
+    <%= f.text_field :category, class:'form-control book_category' %>
+  </div>
   <div class="form-group" id="star">
-      <%= f.label :star %>
+      <%= f.label :Score %>
       <%= f.hidden_field :star, id: :review_star, class: 'form-control' %>
       <div id="post_raty"></div>
     </div>

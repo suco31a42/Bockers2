@@ -42,6 +42,9 @@
       </nav>
     </header>
     <main>
+      <% if user_signed_in? %>
+        <%= render 'tagsearches/tagsearch' %>
+      <% end %>
       <p id="notice"><%= flash[:notice] %></p>
     <%= yield %>
     </main>

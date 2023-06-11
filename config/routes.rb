@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :books, only: [:index, :show, :edit, :update, :create, :destroy] do
     resource :favorites, only: [:create,:destroy]
   end
+  get 'tagsearches/search', to: 'tagsearches#search'
+
   resources :users, only: [:index, :show, :edit, :update] do
       get "search", to: "users#search"
     member do
@@ -23,8 +25,6 @@ Rails.application.routes.draw do
     get "send/mail" => "groups#send_mail"
   end
   resources :chats, only: [:create, :show]
-
-
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

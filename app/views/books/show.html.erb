@@ -21,6 +21,11 @@
             </th>
             <th><%= link_to @bookid.title, book_path(@bookid)%></th>
             <th><%= @bookid.body %></th>
+            <th>
+              <% if @bookid.category.present? %>
+                <%= link_to @bookid.category, tagsearches_search_path(content: @bookid.category) %>
+              <% end %>
+            </th>
             <th><%= render 'books/star', book: @bookid %></th>
           </tr>
           <tr>
